@@ -34,7 +34,7 @@ type RestServer struct {
 	swaggerDoc  string
 }
 
-func NewRestServer(port uint16, basePath string, grpcAddr string) *RestServer {
+func NewRestServer(port uint16, basePath string, grpcAddr string, swaggerDoc string) *RestServer {
 	ctx, ctxCancelFn := context.WithCancel(context.Background())
 	return &RestServer{
 		port:        port,
@@ -45,6 +45,7 @@ func NewRestServer(port uint16, basePath string, grpcAddr string) *RestServer {
 		gwMux:       runtime.NewServeMux(),
 		dialOptions: []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())},
 		grpcAddr:    grpcAddr,
+		swaggerDoc:  swaggerDoc,
 	}
 }
 
